@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test.gd" type="Script" id=1]
+[ext_resource path="res://9.jpg" type="Texture" id=2]
+[ext_resource path="res://letteropener.tscn" type="PackedScene" id=3]
+[ext_resource path="res://letter.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 3
+light_mode = 0
+
+[sub_resource type="Gradient" id=2]
+
+offsets = PoolRealArray( 0, 0.0314465 )
+colors = PoolColorArray( 0.441406, 0.441406, 0.441406, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+
+flags = 4
+gradient = SubResource( 2 )
+width = 2048
+_sections_unfolded = [ "gradient" ]
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "New Anim"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Letter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -449.75, 727.567 ), Vector2( 741.042, 392.735 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Letter:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -42.4, 7.48056 ]
+}
+
+[node name="Root" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 877.007, 560.776 )
+rotation = 1.5708
+scale = Vector2( 0.3, 0.3 )
+z_index = -90
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 2.8, 24.23, 8000, 8000 )
+region_filter_clip = true
+_sections_unfolded = [ "Material", "Offset", "Pause", "Region", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Background"]
+material = SubResource( 1 )
+position = Vector2( -1794.63, 426.646 )
+texture = SubResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 150, 4996.2 )
+_sections_unfolded = [ "Material", "Offset", "Region", "Transform", "Visibility", "material", "texture" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite2" type="Sprite" parent="Background"]
+material = SubResource( 1 )
+position = Vector2( 1011.26, 435.032 )
+texture = SubResource( 3 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 150, 4996.2 )
+_sections_unfolded = [ "Material", "Offset", "Region", "Transform", "Visibility", "material", "texture" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LetterOpener" parent="." instance=ExtResource( 3 )]
+position = Vector2( 217.581, 591.374 )
+rotation = -0.244346
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Letter" parent="." instance=ExtResource( 4 )]
+position = Vector2( 741.042, 392.735 )
+rotation = 0.13056
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+autoplay = "New Anim"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+"anims/New Anim" = SubResource( 4 )
+blend_times = [  ]
+

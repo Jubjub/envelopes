@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tearing_paper.ogg-c9c09fa3fad5b4421083cae8757c7e0e.oggstr"
+
+[deps]
+
+source_file="res://tearing_paper.ogg"
+dest_files=[ "res://.import/tearing_paper.ogg-c9c09fa3fad5b4421083cae8757c7e0e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

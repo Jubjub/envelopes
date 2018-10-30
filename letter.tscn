@@ -1,0 +1,202 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://letter.gd" type="Script" id=1]
+[ext_resource path="res://envelope_1.png" type="Texture" id=2]
+[ext_resource path="res://Envelope.gd" type="Script" id=3]
+[ext_resource path="res://tearing_paper.ogg" type="AudioStream" id=4]
+[ext_resource path="res://handwritten2.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Paper.gd" type="Script" id=6]
+[ext_resource path="res://paper1.png" type="Texture" id=7]
+[ext_resource path="res://handwritten5.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 54
+outline_size = 0
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Resource", "Settings", "font_data" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 300, 180 )
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 22
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Settings" ]
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "TakeOutLetter"
+length = 1.31
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Paper:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3, 0.8, 1.3 ),
+"transitions": PoolRealArray( 1, 2.46229, 4.75683 ),
+"update": 0,
+"values": [ Vector2( -6.7183, 9.27512 ), Vector2( -602.976, 9.27512 ), Vector2( -9.36847, 9.27512 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Paper:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.9, 1.28284 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -4.79391 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Paper:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -1, 0 ]
+}
+
+[node name="Letter" type="Node2D"]
+position = Vector2( -1, 0 )
+script = ExtResource( 1 )
+
+[node name="Envelope" type="Sprite" parent="."]
+position = Vector2( 0.902524, 11.7325 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="StampPosition1" type="Position2D" parent="Envelope"]
+position = Vector2( 672.783, -380.321 )
+
+[node name="StampPosition2" type="Position2D" parent="Envelope"]
+position = Vector2( 674.25, -64.8978 )
+
+[node name="StampPosition3" type="Position2D" parent="Envelope"]
+position = Vector2( 281.071, -381.788 )
+
+[node name="RippingSound" type="AudioStreamPlayer" parent="Envelope"]
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="Address" type="Label" parent="."]
+self_modulate = Color( 0.94902, 0.2, 0.2, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -270.0
+margin_top = -37.0
+margin_right = -30.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Someone Jones
+before Somthing st 134
+somewhere, LA"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Material", "Mouse", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_fonts/font", "custom_styles" ]
+
+[node name="LetterArea" type="Area2D" parent="."]
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LetterArea"]
+position = Vector2( 1.09747, 11.415 )
+shape = SubResource( 2 )
+
+[node name="Paper" type="Node2D" parent="."]
+position = Vector2( -6.7183, 9.27512 )
+z_index = -1
+script = ExtResource( 6 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="PaperSprite" type="Sprite" parent="Paper"]
+position = Vector2( -9.36847, 4.27512 )
+scale = Vector2( 0.274, 0.274 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Region", "Script", "Transform", "Z Index" ]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Paper"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -206.0
+margin_top = -140.0
+margin_right = 238.0
+margin_bottom = 145.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/normal_font = SubResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+scroll_active = false
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "Anchor", "BBCode", "Focus", "Hint", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_fonts/normal_font", "custom_styles", "material" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/TakeOutLetter = SubResource( 4 )
+blend_times = [  ]
+
+[connection signal="meta_clicked" from="Paper/RichTextLabel" to="Paper" method="_on_RichTextLabel_meta_clicked"]
